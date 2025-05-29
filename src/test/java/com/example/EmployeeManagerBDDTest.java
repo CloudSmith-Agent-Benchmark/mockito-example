@@ -81,11 +81,6 @@ public class EmployeeManagerBDDTest {
 
 	@Test
 	public void testPayEmployeesInOrderWhenSeveralEmployeeArePresent() {
-		// an example of invocation order verification
-		given(employeeRepository.findAll())
-			.willReturn(asList(
-					new Employee("1", 1000),
-					new Employee("2", 2000)));
 		assertThat(employeeManager.payEmployees()).isEqualTo(2);
 		InOrder inOrder = inOrder(bankService);
 		then(bankService).should(inOrder).pay("1", 1000);
