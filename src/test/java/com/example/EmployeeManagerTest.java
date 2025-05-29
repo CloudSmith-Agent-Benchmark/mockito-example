@@ -37,8 +37,6 @@ public class EmployeeManagerTest {
 
 	@Test
 	public void testPayEmployeesWhenOneEmployeeIsPresent() {
-		when(employeeRepository.findAll())
-			.thenReturn(asList(new Employee("1", 1000)));
 		assertThat(employeeManager.payEmployees()).isEqualTo(1);
 		verify(bankService).pay("1", 1000);
 	}
@@ -89,8 +87,8 @@ public class EmployeeManagerTest {
 		// Just an example of ArgumentCaptor
 		when(employeeRepository.findAll())
 				.thenReturn(asList(
-						new Employee("1", 1000),
-						new Employee("2", 2000)));
+						new Employee("1", 2000),
+						new Employee("2", 3000)));
 		assertThat(employeeManager.payEmployees()).isEqualTo(2);
 		ArgumentCaptor<String> idCaptor = ArgumentCaptor.forClass(String.class);
 		ArgumentCaptor<Double> amountCaptor = ArgumentCaptor.forClass(Double.class);
